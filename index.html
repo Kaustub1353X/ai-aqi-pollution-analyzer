@@ -1,1 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI AQI Pollution Analyzer</title>
 
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #07111f;
+  color: #f5f7fa;
+  line-height: 1.6;
+}
+
+header {
+  padding: 20px 7%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #0b1728;
+  border-bottom: 1px solid #1d3047;
+}
+
+.logo {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.logo span {
+  color: #42d392;
+}
+
+nav a {
+  color: #b9c7d8;
+  text-decoration: none;
+  margin-left: 20px;
+}
+
+.hero {
+  padding: 80px 7%;
+  text-align: center;
+  background: linear-gradient(135deg, #07111f, #10283c);
+}
+
+.hero h1 {
+  font-size: clamp(38px, 7vw, 70px);
+  margin-bottom: 20px;
+}
+
+.hero h1 span {
+  color: #42d392;
+}
+
+.hero p {
+  max-width: 700px;
+  margin: auto;
+  color: #b9c7d8;
+  font-size: 18px;
+}
+
+.btn {
+  display: inline-block;
+  margin-top: 30px;
+  padding: 13px 25px;
+  background: #42d392;
+  color: #061018;
+  text-decoration: none;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+section {
+  padding: 60px 7%;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 35px;
+}
+
+.title h2 {
+  font-size: 32px;
+}
+
+.title p {
+  color: #9fb0c3;
+}
+
+.dashboard {
+  max-width: 900px;
+  margin: auto;
+  background: #0d1b2d;
+  padding: 30px;
+  border-radius: 18px;
+  border: 1px solid #20354d;
+}
+
+.input-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 18px;
+}
+
+.input-box label {
+  display: block;
+  margin-bottom: 7px;
+  color: #b9c7d8;
+}
+
+.input-box input {
+  width: 100%;
+  padding: 13px;
+  border-radius: 9px;
+  border: 1px solid #30465e;
+  background: #07111f;
+  color: white;
+  font-size: 16px;
+}
+
+.analyze {
+  width: 100%;
+  margin-top: 25px;
+  padding: 14px;
+  border: none;
+  border-radius: 10px;
+  background: #42d392;
+  font-size: 17px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.result {
+  margin-top: 30px;
+  text-align: center;
+  padding: 25px;
+  background: #07111f;
+  border-radius: 15px;
+}
+
+.aqi-number {
+  font-size: 55px;
+  font-weight: bold;
+  color: #42d392;
+}
+
+.status {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 20px;
+  max-width: 1000px;
+  margin: auto;
+}
+
+.card {
+  background: #0d1b2d;
+  border: 1px solid #20354d;
+  border-radius: 15px;
+  padding: 25px;
+}
+
+.card h3 {
+  color: #42d392;
+  margin-bottom: 8px;
+}
+
+.card p {
+  color: #aebdce;
+}
+
+.about {
+  max-width: 850px;
+  margin: auto;
+  text-align: center;
+  color: #b9c7d8;
+}
+
+footer {
+  padding: 30px;
+  text-align: center;
+  background: #050c15;
+  color: #8293a7;
+}
+
+@media (max-width: 600px) {
+  nav {
+    display: none;
+  }
+
+  .hero {
+    padding: 60px 6%;
+  }
+
+  section {
+    padding: 45px 6%;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">AI<span>•AQI</span></div>
+  <nav>
+    <a href="#dashboard">Dashboard</a>
+    <a href="#features">Features</a>
+    <a href="#about">About</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <h1>AI-Powered <span>Air Quality</span> Analyzer</h1>
+
+  <p>
+    Analyze pollution indicators, estimate air quality,
+    and explore environmental data through an interactive dashboard.
+  </p>
+
+  <a href="#dashboard" class="btn">Explore Dashboard</a>
+</section>
+
+<section id="dashboard">
+
+  <div class="title">
+    <h2>Air Quality Analyzer</h2>
+    <p>Enter pollution values to estimate the air-quality level.</p>
+  </div>
+
+  <div class="dashboard">
+
+    <div class="input-grid">
+
+      <div class="input-box">
+        <label>PM2.5</label>
+        <input id="pm25" type="number" placeholder="µg/m³">
+      </div>
+
+      <div class="input-box">
+        <label>PM10</label>
+        <input id="pm10" type="number" placeholder="µg/m³">
+      </div>
+
+      <div class="input-box">
+        <label>NO₂</label>
+        <input id="no2" type="number" placeholder="µg/m³">
+      </div>
+
+      <div class="input-box">
+        <label>CO</label>
+        <input id="co" type="number" placeholder="mg/m³">
+      </div>
+
+    </div>
+
+    <button class="analyze" onclick="analyzeAQI()">
+      Analyze Air Quality
+    </button>
+
+    <div class="result">
+      <div class="aqi-number" id="aqi">--</div>
+      <div class="status" id="status">Enter values to analyze</div>
+      <p id="message"></p>
+    </div>
+
+  </div>
+</section>
+
+<section id="features">
+
+  <div class="title">
+    <h2>Project Features</h2>
+    <p>Designed as a student AIML environmental analytics project.</p>
+  </div>
+
+  <div class="cards">
+
+    <div class="card">
+      <h3>📊 Data Analysis</h3>
+      <p>Analyze important air-pollution indicators such as PM2.5, PM10 and NO₂.</p>
+    </div>
+
+    <div class="card">
+      <h3>🤖 Smart Analysis</h3>
+      <p>Estimate an air-quality category from the entered pollution values.</p>
+    </div>
+
+    <div class="card">
+      <h3>📈 Visualization</h3>
+      <p>Designed to support future charts and historical pollution trends.</p>
+    </div>
+
+    <div class="card">
+      <h3>🌍 Environmental Focus</h3>
+      <p>Built to demonstrate how technology can help understand air quality.</p>
+    </div>
+
+  </div>
+</section>
+
+<section id="about">
+
+  <div class="title">
+    <h2>About This Project</h2>
+  </div>
+
+  <div class="about">
+    <p>
+      AI-AQI Pollution Analyzer is an AIML student project focused on
+      understanding air-quality data and presenting it through an
+      easy-to-use web interface.
+    </p>
+
+    <br>
+
+    <p>
+      Technology stack: HTML, CSS, JavaScript and, in future versions,
+      Python, Machine Learning and real-world air-quality datasets.
+    </p>
+  </div>
+
+</section>
+
+<footer>
+  AI-AQI Pollution Analyzer • AIML Student Project
+</footer>
+
+<script>
+function analyzeAQI() {
+
+  let pm25 = Number(document.getElementById("pm25").value);
+  let pm10 = Number(document.getElementById("pm10").value);
+  let no2 = Number(document.getElementById("no2").value);
+  let co = Number(document.getElementById("co").value);
+
+  if (!pm25 && !pm10 && !no2 && !co) {
+    document.getElementById("status").innerText =
+      "Please enter pollution values.";
+    document.getElementById("message").innerText = "";
+    return;
+  }
+
+  let aqi = Math.round(
+    (pm25 * 2) +
+    (pm10 * 0.5) +
+    (no2 * 0.3) +
+    (co * 10)
+  );
+
+  let status = "";
+  let message = "";
+
+  if (aqi <= 50) {
+    status = "Good";
+    message = "Air quality is generally considered good.";
+  } 
+  else if (aqi <= 100) {
+    status = "Moderate";
+    message = "Air quality is acceptable but may affect sensitive people.";
+  } 
+  else if (aqi <= 200) {
+    status = "Unhealthy";
+    message = "Air pollution may affect health-sensitive groups.";
+  } 
+  else if (aqi <= 300) {
+    status = "Very Unhealthy";
+    message = "Air pollution levels are high.";
+  } 
+  else {
+    status = "Hazardous";
+    message = "Pollution levels are extremely high.";
+  }
+
+  document.getElementById("aqi").innerText = aqi;
+  document.getElementById("status").innerText = status;
+  document.getElementById("message").innerText = message;
+}
+</script>
+
+</body>
+</html>
